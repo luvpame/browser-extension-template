@@ -1,26 +1,19 @@
 # Browser Extension Template
 
-Minimal browser extension template built with WXT, React, Bun, TypeScript, and optional Nix.
+Minimal browser extension template built with WXT, React, pnpm, TypeScript, Vite+, and mise.
 
 ## Requirements
 
-- Bun
+- mise
+- Node.js 24 and pnpm 10 via `mise install`
 - Chrome or Chromium
 - Firefox
-- Nix (optional, for `nix develop` / `direnv`)
-
-## Development Shell
-
-```bash
-nix develop
-```
-
-If `package.json` or `bun.lock` changed, the shell may refresh dependencies for you.
 
 ## Setup
 
 ```bash
-bun install
+mise install
+vp install
 ```
 
 This runs `wxt prepare` via `postinstall` and generates the `.wxt/` TypeScript config.
@@ -30,21 +23,21 @@ This runs `wxt prepare` via `postinstall` and generates the `.wxt/` TypeScript c
 Run once after cloning to replace template placeholders with your project name:
 
 ```bash
-bun run init <project-name>
+vp run init <project-name>
 ```
 
-Example: `bun run init my-awesome-extension` updates package name, extension display name, protocol identifiers, and renames `lib/template-*.ts` files. Run `bun install` afterward to refresh the lockfile.
+Example: `vp run init my-awesome-extension` updates package name, extension display name, protocol identifiers, rewrites `AGENTS.md`, and renames `lib/template-*.ts` files. Run `vp install` afterward to refresh the lockfile.
 
 ## Commands
 
 ```bash
-bun run dev
-bun run dev:chrome
-bun run dev:firefox
-bun run test
-bun run build
-bun run zip
-bun run check
+vp run dev
+vp run dev:chrome
+vp run dev:firefox
+vp check
+vp test
+vp run build
+vp run zip
 ```
 
 ### GitHub Actions Lint (local)
@@ -52,15 +45,13 @@ bun run check
 Static analysis for `.github/workflows/` using actionlint, ghalint, and zizmor:
 
 ```bash
-bun run lint:gha
+vp run lint:gha
 ```
 
-Install the tools. With `nix develop`, actionlint is included; otherwise install all via Homebrew:
+Install the tools via `mise install`, or install them manually if you prefer:
 
 ```bash
-brew install actionlint
-brew install suzuki-shunsuke/ghalint/ghalint
-brew install zizmor
+mise install
 ```
 
 ## Template Contents
@@ -68,7 +59,7 @@ brew install zizmor
 - `background` entrypoint with install logging and popup message handling
 - React `popup` entrypoint for verifying popup-to-background messaging
 - Minimal manifest config with icons only
-- Vitest + WXT test setup for background and config behavior
+- Vite+ test/check workflow with WXT-aware test setup for background and config behavior
 
 ## Build Outputs
 
@@ -106,6 +97,14 @@ export default defineWebExtConfig({
 ```
 
 This file is ignored by git and is intended for machine-local overrides only.
+
+## Toolchain Notes
+
+- `pnpm` is the package manager for dependency installation and script execution
+- Use `vp install`, `vp check`, and `vp test` as the primary Vite+ entrypoints for dependency setup and verification
+- Use `vp run <script>` for WXT-specific package scripts such as `dev`, `build`, `zip`, `init`, and `lint:gha`
+- WXT remains responsible for browser-extension dev/build/zip commands
+- `mise.toml` manages the local toolchain, including Node.js, pnpm, and GitHub Actions lint helpers
 
 ## Scope
 
