@@ -35,6 +35,7 @@
 
 ## プロジェクト保守の注意
 
+- 拡張機能のメタデータ（名前・説明など）は `lib/template-metadata.ts` に集約してください。
 - popup/background 間の message type は `lib/template-protocol.ts` に集約してください。呼び出し側へ生文字列を増やさないでください。
 - 拡張機能名、protocol 名、metadata、または関連ファイル名を変えるときは、`lib/template-*.ts`、`README.md`、関連テストをまとめて更新してください。
 - zip や CI に関わる変更では、`.github/workflows/ci.yml` と `.output/*.zip` の生成フローも合わせて確認してください。
