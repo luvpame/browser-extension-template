@@ -7,7 +7,6 @@ Minimal browser extension template built with WXT, React, pnpm, TypeScript, Vite
 - mise
 - Node.js 24 and pnpm 10 via `mise install`
 - Chrome or Chromium
-- Firefox
 
 ## Setup
 
@@ -32,26 +31,10 @@ Example: `vp run init my-awesome-extension` updates package name, extension disp
 
 ```bash
 vp run dev
-vp run dev:chrome
-vp run dev:firefox
 vp check
 vp test
 vp run build
 vp run zip
-```
-
-### GitHub Actions Lint (local)
-
-Static analysis for `.github/workflows/` using actionlint, ghalint, and zizmor:
-
-```bash
-vp run lint:gha
-```
-
-Install the tools via `mise install`, or install them manually if you prefer:
-
-```bash
-mise install
 ```
 
 ## Template Contents
@@ -64,7 +47,6 @@ mise install
 ## Build Outputs
 
 - Chrome: `.output/chrome-mv3/`
-- Firefox: `.output/firefox-mv2/`
 
 ## Load Unpacked Extension
 
@@ -75,15 +57,9 @@ mise install
 3. Choose "Load unpacked"
 4. Select `.output/chrome-mv3/`
 
-### Firefox
-
-1. Open `about:debugging#/runtime/this-firefox`
-2. Choose "Load Temporary Add-on"
-3. Select any file inside `.output/firefox-mv2/`
-
 ## Optional Local Browser Overrides
 
-If WXT cannot find your browser binaries, create an untracked `web-ext.config.ts`:
+If WXT cannot find your Chrome binary, create an untracked `web-ext.config.ts`:
 
 ```ts
 import { defineWebExtConfig } from "wxt";
@@ -91,7 +67,6 @@ import { defineWebExtConfig } from "wxt";
 export default defineWebExtConfig({
   binaries: {
     chrome: "/path/to/chrome",
-    firefox: "/path/to/firefox",
   },
 });
 ```
@@ -100,11 +75,11 @@ This file is ignored by git and is intended for machine-local overrides only.
 
 ## Toolchain Notes
 
-- `pnpm` is the package manager for dependency installation and script execution
+- `pnpm` is the package manager for dependency installation and package lifecycle hooks
 - Use `vp install`, `vp check`, and `vp test` as the primary Vite+ entrypoints for dependency setup and verification
-- Use `vp run <script>` for WXT-specific package scripts such as `dev`, `build`, `zip`, `init`, and `lint:gha`
+- Use `vp run <task>` for WXT-specific tasks defined in `vite.config.ts`, such as `dev`, `build`, `zip`, and `init`
 - WXT remains responsible for browser-extension dev/build/zip commands
-- `mise.toml` manages the local toolchain, including Node.js, pnpm, and GitHub Actions lint helpers
+- `mise.toml` manages the local toolchain, including Node.js and pnpm
 
 ## Scope
 
