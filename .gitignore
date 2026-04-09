@@ -1,11 +1,9 @@
 .DS_Store
-.direnv/
-.local/
+.agents/
 node_modules/
 .output/
 .wxt/
 dist/
 *.zip
-bun.lockb
 web-ext.config.ts
 build/
