@@ -110,7 +110,7 @@ export const initializeProject = async ({
   const pascalPrefix = toPascalCase(projectName);
   const protocolPrefix = packageName;
 
-  const replacements = [
+  const replacements: [string, string][] = [
     [TEMPLATE_PACKAGE_NAME, packageName],
     [TEMPLATE_DISPLAY_NAME, displayName],
     [`${TEMPLATE_PROTOCOL_PREFIX}:ping`, `${protocolPrefix}:ping`],
@@ -126,7 +126,7 @@ export const initializeProject = async ({
   const newMetadataPath = path.join(projectRoot, `lib/${packageName}-metadata.ts`);
   const newProtocolPath = path.join(projectRoot, `lib/${packageName}-protocol.ts`);
 
-  const importReplacements = [
+  const importReplacements: [string, string][] = [
     ["template-metadata", `${packageName}-metadata`],
     ["template-protocol", `${packageName}-protocol`],
   ];
