@@ -37,6 +37,14 @@ vp run build
 vp run zip
 ```
 
+## Project Structure
+
+- `entrypoints/` - Extension entry points (popup, background)
+- `lib/` - Shared utilities and message protocol definitions
+- `tests/` - Test files for components and utilities
+- `public/` - Static assets
+- `scripts/` - Build and initialization scripts
+
 ## Template Contents
 
 - `background` entrypoint with install logging and popup message handling
