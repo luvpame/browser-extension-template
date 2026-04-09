@@ -1,0 +1,4 @@
+interface:
+  display_name: "Browser Extension Builder"
+  short_description: "Build a browser extension from this WXT template"
+  default_prompt: "Use $browser-extension-builder to build a browser extension from this template based on my requirements."
