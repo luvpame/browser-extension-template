@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 import { describe, expect, it } from "vite-plus/test";
 
-import { initializeProject } from "../scripts/init.js";
+import { initializeProject } from "../scripts/init";
 
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -30,7 +30,7 @@ const createInitWorkspace = async () => {
     "lib/template-metadata.ts",
     "lib/template-protocol.ts",
     "package.json",
-    "scripts/init.js",
+    "scripts/init.ts",
     "tests/background.spec.ts",
     "tests/template-protocol.spec.ts",
     "tests/wxt-config.spec.ts",

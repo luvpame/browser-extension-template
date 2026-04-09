@@ -18,7 +18,7 @@ const TEMPLATE_DISPLAY_NAME = "Browser Extension Template";
 const TEMPLATE_PREFIX = "template";
 const TEMPLATE_PROTOCOL_PREFIX = "template";
 
-const toKebabCase = (value) =>
+const toKebabCase = (value: string): string =>
   value
     .trim()
     .replace(/\s+/g, "-")
@@ -27,13 +27,13 @@ const toKebabCase = (value) =>
     .replace(/^-|-$/g, "")
     .toLowerCase() || "extension";
 
-const toDisplayName = (value) =>
+const toDisplayName = (value: string): string =>
   toKebabCase(value)
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 
-const toCamelCase = (value) => {
+const toCamelCase = (value: string): string => {
   const parts = toKebabCase(value).split("-");
 
   return (
@@ -45,13 +45,13 @@ const toCamelCase = (value) => {
   );
 };
 
-const toPascalCase = (value) => {
+const toPascalCase = (value: string): string => {
   const camel = toCamelCase(value);
 
   return camel.charAt(0).toUpperCase() + camel.slice(1);
 };
 
-const replaceAll = (content, replacements) => {
+const replaceAll = (content: string, replacements: [string, string][]): string => {
   let result = content;
 
   for (const [from, to] of replacements) {
@@ -61,7 +61,7 @@ const replaceAll = (content, replacements) => {
   return result;
 };
 
-const ensureExists = async (filePath) => {
+const ensureExists = async (filePath: string): Promise<void> => {
   try {
     await access(filePath);
   } catch {
@@ -70,11 +70,12 @@ const ensureExists = async (filePath) => {
   }
 };
 
-const readText = (filePath) => readFile(filePath, "utf8");
+const readText = (filePath: string): Promise<string> => readFile(filePath, "utf8");
 
-const writeText = (filePath, content) => writeFile(filePath, content, "utf8");
+const writeText = (filePath: string, content: string): Promise<void> =>
+  writeFile(filePath, content, "utf8");
 
-const run = (command, args, cwd) =>
+const run = (command: string, args: string[], cwd: string): Promise<void> =>
   new Promise((resolve, reject) => {
     const child = spawn(command, args, {
       cwd,
@@ -98,7 +99,11 @@ export const initializeProject = async ({
   projectName,
   projectRoot = resolveProjectRoot(),
   format = true,
-}) => {
+}: {
+  projectName: string;
+  projectRoot?: string;
+  format?: boolean;
+}): Promise<void> => {
   const packageName = toKebabCase(projectName);
   const displayName = toDisplayName(projectName);
   const camelPrefix = toCamelCase(projectName);
