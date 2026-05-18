@@ -42,10 +42,6 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: vp run zip:chrome
 
-      - name: Zip Firefox
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: vp run zip:firefox
-
       - name: Debug package artifacts
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |

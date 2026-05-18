@@ -7,11 +7,11 @@
  * Run only once on a fresh template clone.
  */
 
+import { spawn } from "node:child_process";
 import { access, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
-import { spawn } from "node:child_process";
 
 const TEMPLATE_PACKAGE_NAME = "browser-extension-template";
 const TEMPLATE_DISPLAY_NAME = "Browser Extension Template";
@@ -178,7 +178,7 @@ export const initializeProject = async ({
   await rm(path.join(projectRoot, "tests/template-protocol.spec.ts"), { force: true });
 
   if (format) {
-    await run("pnpm", ["run", "format"], projectRoot);
+    await run("vp", ["fmt"], projectRoot);
   }
 
   console.log(`Initialized project: ${displayName} (${packageName})`);

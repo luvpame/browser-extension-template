@@ -3,7 +3,7 @@ import { WxtVitest } from "wxt/testing/vitest-plugin";
 
 export default defineConfig({
   staged: {
-    "*": "vp check --fix",
+    "*": "vp fmt",
   },
   plugins: [WxtVitest()],
   run: {
@@ -19,6 +19,9 @@ export default defineConfig({
       },
       zip: {
         command: "wxt zip",
+      },
+      "zip:chrome": {
+        command: "wxt zip --browser chrome",
       },
     },
   },

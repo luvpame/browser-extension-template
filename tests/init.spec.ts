@@ -50,6 +50,21 @@ const createInitWorkspace = async () => {
 };
 
 describe("initializeProject", () => {
+  it("formats the initialized project by default", async () => {
+    const workspace = await createInitWorkspace();
+
+    try {
+      await expect(
+        initializeProject({
+          projectName: "my-awesome-extension",
+          projectRoot: workspace.projectRoot,
+        }),
+      ).resolves.toBeUndefined();
+    } finally {
+      await workspace.remove();
+    }
+  });
+
   it("rewrites AGENTS.md for the initialized project", async () => {
     const workspace = await createInitWorkspace();
 

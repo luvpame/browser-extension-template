@@ -7,8 +7,8 @@
     "postinstall": "wxt prepare"
   },
   "dependencies": {
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
   },
   "devDependencies": {
     "@types/react": "^19.1.12",
@@ -17,8 +17,8 @@
     "esbuild": "^0.28.0",
     "npm-run-all2": "^8.0.4",
     "typescript": "^5.9.3",
-    "vite-plus": "^0.1.16",
-    "wxt": "^0.20.18"
+    "vite-plus": "^0.1.21",
+    "wxt": "^0.20.26"
   },
   "packageManager": "pnpm@10.18.0"
 }
