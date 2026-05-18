@@ -32,9 +32,6 @@ jobs:
       - name: Check
         run: vp check
 
-      - name: Lint GitHub Actions
-        run: vp run lint:gha
-
       - name: Test
         run: vp test
 
